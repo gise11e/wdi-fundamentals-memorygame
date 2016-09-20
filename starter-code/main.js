@@ -40,9 +40,11 @@ function isMatch(selectedCards) {
 }
 
 function resetBoard() {
+	shuffle(cards);
     var cardsOnBoard = document.querySelectorAll(".card");
     for (var i=0; i<cardsOnBoard.length; i++) {
     	cardsOnBoard[i].innerHTML = "";
+    	cardsOnBoard[i].setAttribute('data-card', cards[i]);
     }
 }
 
@@ -71,6 +73,27 @@ function isTwoCards() {
 
 }
 
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
+shuffle(cards);
+console.log(cards);
 createBoard();
 
 document.getElementById('reset').addEventListener('click', resetBoard);
